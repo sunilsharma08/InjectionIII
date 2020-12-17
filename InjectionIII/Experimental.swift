@@ -5,7 +5,7 @@
 //  Created by User on 20/10/2020.
 //  Copyright © 2020 John Holdsworth. All rights reserved.
 //
-//  $Id: //depot/ResidentEval/InjectionIII/Experimental.swift#29 $
+//  $Id: //depot/ResidentEval/InjectionIII/Experimental.swift#30 $
 //
 
 import Cocoa
@@ -283,7 +283,7 @@ extension AppDelegate {
 
                 source[#"""
                     ^((\s+)(public )?(var body:|func body\([^)]*\) -\>) some View \{\n\#
-                    (\2(?!    (if|switch) )\s+[\w.}](?!(eraseToAnyView|orEach)).*\n|\n)+)\2\}\n
+                    (\2(?!    (if|switch) )\s+(?!\.eraseToAnyView|ForEach)\S.*\n|\n)+)(?<!#endif\n)\2\}\n
                     """#.anchorsMatchLines] = """
                     $1$2    .eraseToAnyView()
                     $2}
